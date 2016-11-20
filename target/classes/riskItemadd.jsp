@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>riskItem</title>
+<title>riskItemAdd</title>
 <link rel="stylesheet" href="mycss.css" type="text/css" />
 <script type="text/javascript">
 
@@ -35,8 +35,8 @@
 				<div class="nav"></div>
 				<div class="nav"></div>
 				<div class="nav"></div>
-				<form action="riskItemadd.jsp" method="post">
-					<input type="submit" value="增加风险">
+				<form action="riskItem" method="post">
+					<input type="submit" value="风险管理">
 				</form>
 
 				<div class="nav"></div>
@@ -47,51 +47,46 @@
 				</form>
 
 			</div>
-			<%@page import="java.util.*"%> 
-			<%@page import="vo.RiskItem" %>
-			<%ArrayList<Object> riskItemlist=(ArrayList<Object>)session.getAttribute("riskItemList");%>	
 			<div class="right_box border">
-				<table  width=100% cellspacing="20">
-					<tr>
-						<th>id</th>
-						<th>风险名称</th>
-						<th>风险类型</th>
-						<th>可能性</th>
-						<th>影响程度</th>
-						<th>风险状态</th>
-						<th>提交者</th>
-						<th>跟踪者</th>
-					
-					</tr>
-					<%for(int i=0;i<riskItemlist.size();i++){ %>
-					<%RiskItem riskItem=null; %>
-								
-					<tr>
-					<%riskItem=(RiskItem)riskItemlist.get(i);%>
-						
-						<td><%=riskItem.getName()  %></td>
-						<td><%=riskItem.getType() %></td>
-						<td><%=riskItem.getPossible() %></td>
-						<td><%=riskItem.getInfluence() %></td>
-						<td><%=riskItem.getStatus() %></td>
-						<td><%=riskItem.getCommit() %></td>
-						<td><%=riskItem.getFollow() %></td>
-					</tr>
-					<% }%>
-				</table>
 				
+				增加风险条目
 				<div class="nav"></div>
 				<form action="riskItem" method=post>
 				 <input type= "hidden" name= "method"/> 
-				 <div class="nav"></div>
-				  风险名称  <input type=text name="riskname">
-					<input type="submit"  value="追踪风险" onclick="method.value='find'">
-				</form>
-				
-				<form action="riskItem" method=post>
-				 <input type= "hidden" name= "method"/> 
-				 <div class="nav"></div>
-					<input type="submit"  value="现有风险" onclick="method.value='list'">
+				    id:<input type="text" name="id"><br />
+					<div class="nav"></div>
+					<div class="nav"></div>
+					风险名称:<input type="text" name="riskname"><br />
+					<div class="nav"></div>
+					<div class="nav"></div>
+					风险类型:<input type="text" name="type"><br />
+					<div class="nav"></div>
+					
+					
+					风险状态:<input type="text" name="status"><br />
+					<div class="nav"></div>
+					<div class="nav"></div>
+					提交者:<input type="text" name="commit"><br />
+					<div class="nav"></div>
+					<div class="nav"></div>
+					跟踪者:<input type="text" name="follow"><br />
+					<div class="nav"></div>
+					<div class="nav"></div>
+					可能性： <select name="possibility">
+						<option value="高">高</option>
+						<option value="中">中</option>
+						<option value="低">低</option>
+
+					</select>
+					影响程度： <select name="influence">
+						<option value="高">高</option>
+						<option value="中">中</option>
+						<option value="低">低</option>
+
+					</select>
+					
+					<div class="nav"></div>
+					<input type="submit"  value="增加风险条目" onclick="method.value='add'">
 				</form>
 			</div>
 			<div class="nav"></div>

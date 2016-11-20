@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>riskItem</title>
+<title>solution</title>
 <link rel="stylesheet" href="mycss.css" type="text/css" />
 <script type="text/javascript">
-
 </script>
 </head>
 <body>
@@ -35,21 +34,16 @@
 				<div class="nav"></div>
 				<div class="nav"></div>
 				<div class="nav"></div>
-				<form action="riskItemadd.jsp" method="post">
-					<input type="submit" value="增加风险">
+				<form action="solutionupdate.jsp" method="post">
+					<input type="submit" value="处理问题">
 				</form>
 
-				<div class="nav"></div>
-				<div class="nav"></div>
-				<div class="nav"></div>
-				<form action="riskItemupdate.jsp" method="post">
-					<input type="submit" value="更新风险">
-				</form>
+				
 
 			</div>
 			<%@page import="java.util.*"%> 
 			<%@page import="vo.RiskItem" %>
-			<%ArrayList<Object> riskItemlist=(ArrayList<Object>)session.getAttribute("riskItemList");%>	
+			<%ArrayList<Object> riskItemlist=(ArrayList<Object>)session.getAttribute("solutionList");%>	
 			<div class="right_box border">
 				<table  width=100% cellspacing="20">
 					<tr>
@@ -59,8 +53,8 @@
 						<th>可能性</th>
 						<th>影响程度</th>
 						<th>风险状态</th>
-						<th>提交者</th>
-						<th>跟踪者</th>
+						<th>解决方案</th>
+						
 					
 					</tr>
 					<%for(int i=0;i<riskItemlist.size();i++){ %>
@@ -68,30 +62,29 @@
 								
 					<tr>
 					<%riskItem=(RiskItem)riskItemlist.get(i);%>
-						
-						<td><%=riskItem.getName()  %></td>
+						<td><%=riskItem.getId() %></td>
+						<td><%=riskItem.getRiskname() %></td>
 						<td><%=riskItem.getType() %></td>
-						<td><%=riskItem.getPossible() %></td>
+						<td><%=riskItem.getPossibility() %></td>
 						<td><%=riskItem.getInfluence() %></td>
 						<td><%=riskItem.getStatus() %></td>
-						<td><%=riskItem.getCommit() %></td>
-						<td><%=riskItem.getFollow() %></td>
+						<td><%=riskItem.getSolution() %></td>
+						
 					</tr>
 					<% }%>
 				</table>
 				
 				<div class="nav"></div>
-				<form action="riskItem" method=post>
+				<form action="solution" method=post>
 				 <input type= "hidden" name= "method"/> 
 				 <div class="nav"></div>
-				  风险名称  <input type=text name="riskname">
-					<input type="submit"  value="追踪风险" onclick="method.value='find'">
+					<input type="submit"  value="未解决问题" onclick="method.value='list'">
 				</form>
 				
-				<form action="riskItem" method=post>
+				<form action="solution" method=post>
 				 <input type= "hidden" name= "method"/> 
 				 <div class="nav"></div>
-					<input type="submit"  value="现有风险" onclick="method.value='list'">
+					<input type="submit"  value="已解决问题" onclick="method.value='done'">
 				</form>
 			</div>
 			<div class="nav"></div>

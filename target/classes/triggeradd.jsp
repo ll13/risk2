@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-    	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>admin</title>
+<title>triggerAdd</title>
 <link rel="stylesheet" href="mycss.css" type="text/css" />
 <script type="text/javascript">
-	
 </script>
 </head>
 <body>
@@ -19,8 +17,8 @@
 		<div class="nav"></div>
 		<div id=welcome>
 
-			<div class="welcomeContent">${session.attribute("username")} 欢迎
-				${sessionScope.username} ${sessionScope.occupation}</div>
+			<div class="welcomeContent">
+			欢迎   ${sessionScope.username}  ${sessionScope.occupation}</div>
 
 			<div class="welcomeleft"></div>
 		</div>
@@ -36,49 +34,47 @@
 				<div class="nav"></div>
 				<div class="nav"></div>
 				<div class="nav"></div>
-				<form action="adminadd.jsp" method="post">
-					<input type="submit"  value="增加用户" >
-					 
+				<form action="trigger" method="post">
+					<input type="submit" value="查看触发器">
 				</form>
 
 				<div class="nav"></div>
 				<div class="nav"></div>
 				<div class="nav"></div>
-				<form action="adminupdate.jsp" method="post">
-					<input type="submit" value="更新用户">
+				<form action="triggerupdate.jsp" method="post">
+					<input type="submit" value="更新触发器">
 				</form>
 
 			</div>
-			<%@page import="java.util.*"%> 
-			<%@page import="vo.User" %>
-			<%ArrayList<Object> userlist=(ArrayList<Object>)session.getAttribute("userList");%>			
 			<div class="right_box border">
-				<table  width=100% cellspacing="20">
-					<tr>
-						<th>id</th>
-						<th>用户名</th>
-						<th>密码</th>
-						<th>职位</th>
-					</tr>
-					<%for(int i=0;i<userlist.size();i++){ %>
-					<%User user=null; %>
-								
-					
-					<tr>
-					<%user=(User)userlist.get(i);%>
-						<td><%=user.getName() %></td>
-						<td><%=user.getPassword() %></td>
-						<td><%=user.getOccupation() %></td>
-					</tr>
-					<% }%>
-				</table>
-				 <form action="admin" method=post>
+				
+				增加风险类型
+				<div class="nav"></div>
+				<form action="trigger" method=post>
 				 <input type= "hidden" name= "method"/> 
-				 名字:<input type=text name="name">
-				 <input type="submit"  value="删除用户" onclick="method.value='delete'">
-				 </form>
+				    id:<input type="text" name="id"><br />
+					<div class="nav"></div>
+					<div class="nav"></div>
+					风险类型:<input type="text" name="type"><br />
+					<div class="nav"></div>
+					<div class="nav"></div>
+					可能性:<select name="possibility">
+						<option value="高">高</option>
+						<option value="中">中</option>
+						<option value="低">低</option>
+
+					</select>
+					影响程度： <select name="influence">
+						<option value="高">高</option>
+						<option value="中">中</option>
+						<option value="低">低</option>
+
+					</select>
+					<div class="nav"></div>
+					<div class="nav"></div>
+					<input type="submit"  value="增加风险类型" onclick="method.value='add'">
+				</form>
 			</div>
-					
 			<div class="nav"></div>
 		</div>
 	</div>

@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>riskItem</title>
+<title>trigger</title>
 <link rel="stylesheet" href="mycss.css" type="text/css" />
 <script type="text/javascript">
-
 </script>
 </head>
 <body>
@@ -35,66 +34,48 @@
 				<div class="nav"></div>
 				<div class="nav"></div>
 				<div class="nav"></div>
-				<form action="riskItemadd.jsp" method="post">
-					<input type="submit" value="增加风险">
+				<form action="triggeradd.jsp" method="post">
+					<input type="submit" value="增加触发器">
 				</form>
 
 				<div class="nav"></div>
 				<div class="nav"></div>
 				<div class="nav"></div>
-				<form action="riskItemupdate.jsp" method="post">
-					<input type="submit" value="更新风险">
+				<form action="triggerupdate.jsp" method="post">
+					<input type="submit" value="更新触发器">
 				</form>
 
 			</div>
 			<%@page import="java.util.*"%> 
-			<%@page import="vo.RiskItem" %>
-			<%ArrayList<Object> riskItemlist=(ArrayList<Object>)session.getAttribute("riskItemList");%>	
+			<%@page import="vo.Trigger" %>
+			<%ArrayList<Object> triggerlist=(ArrayList<Object>)session.getAttribute("triggerList");%>			
 			<div class="right_box border">
 				<table  width=100% cellspacing="20">
 					<tr>
 						<th>id</th>
-						<th>风险名称</th>
 						<th>风险类型</th>
 						<th>可能性</th>
 						<th>影响程度</th>
-						<th>风险状态</th>
-						<th>提交者</th>
-						<th>跟踪者</th>
-					
 					</tr>
-					<%for(int i=0;i<riskItemlist.size();i++){ %>
-					<%RiskItem riskItem=null; %>
+					<%for(int i=0;i<triggerlist.size();i++){ %>
+					<%Trigger trigger=null; %>
 								
+					
 					<tr>
-					<%riskItem=(RiskItem)riskItemlist.get(i);%>
-						
-						<td><%=riskItem.getName()  %></td>
-						<td><%=riskItem.getType() %></td>
-						<td><%=riskItem.getPossible() %></td>
-						<td><%=riskItem.getInfluence() %></td>
-						<td><%=riskItem.getStatus() %></td>
-						<td><%=riskItem.getCommit() %></td>
-						<td><%=riskItem.getFollow() %></td>
+					<%trigger=(Trigger)triggerlist.get(i);%>
+						<td><%=trigger.getId() %></td>
+						<td><%=trigger.getType() %></td>
+						<td><%=trigger.getPossibility() %></td>
+						<td><%=trigger.getInfluence() %></td>
 					</tr>
 					<% }%>
 				</table>
-				
-				<div class="nav"></div>
-				<form action="riskItem" method=post>
+				 <form action="trigger" method=post>
 				 <input type= "hidden" name= "method"/> 
-				 <div class="nav"></div>
-				  风险名称  <input type=text name="riskname">
-					<input type="submit"  value="追踪风险" onclick="method.value='find'">
-				</form>
-				
-				<form action="riskItem" method=post>
-				 <input type= "hidden" name= "method"/> 
-				 <div class="nav"></div>
-					<input type="submit"  value="现有风险" onclick="method.value='list'">
-				</form>
+				 id:<input type=text name="id">
+				 <input type="submit"  value="删除风险类型" onclick="method.value='delete'">
+				 </form>
 			</div>
-			<div class="nav"></div>
 		</div>
 	</div>
 
