@@ -1,7 +1,6 @@
 package dao;
 
 import java.util.ArrayList;
-
 import data.Read;
 import data.Write;
 import vo.User;
@@ -40,37 +39,41 @@ public class UserDao {
 	}
 	
 	   public void read(){
-		   String[][] set= read.readData("data/user.txt");
-		   this.setToList(set);
+		   String[][] set= read.readData("user.txt");	   
+		  this.setToList(set);
 	   }
 	   public void write(){
 		   String [][]set=this.listToSet();
-		   write.writeData("data/user.txt", set);
+		   write.writeData("user.txt", set);
 	   }
        
 	   public void add(User user){
 		   this.read();
 		   User find=this.find(user.getName());
 		   if(find==null){
-		   userlist.add(user);
-		  
+		   userlist.add(user);	  
 		   }
-		  
+		   
 		   this.write();
 	   }
-	   public void delete(String  name){
+	   public boolean delete(String  name){
 		   this.read();
+		   boolean result=false; 
 		   for(int i=0;i<userlist.size();i++){
 			   User compare=userlist.get(i);
 			   if(compare.getName().equals(name)){
-				   userlist.remove(i);
+				   User user=userlist.remove(i);
+				   if(user!=null){
+					   result=true;
+				   }
 			   }
 		   }
 		   this.write();
+		   return result;
 	   }
 	   public User find(String name){
 		   this.read();
-		   User result=new User();
+		   User result=null;
 		   for(int i=0;i<userlist.size();i++){
 			   User compare=userlist.get(i);
 			   if(compare.getName().equals(name)){
@@ -83,8 +86,8 @@ public class UserDao {
 	   
 	  public boolean check(User user){
 		  boolean flag=false;
-		  this.read();
-		  for(int i=0;i<userlist.size();i++){
+		  this.read();	
+		 for(int i=0;i<userlist.size();i++){
 			  User compare=userlist.get(i);
 			  if(compare.getName().equals(user.getName())){
 				  if(compare.getPassword().equals(user.getPassword())){
@@ -97,13 +100,9 @@ public class UserDao {
 		  return flag;
 	  }
 	   
-	 public static void main(String [] args){
-		 UserDao dao=new UserDao();
-		 User user=new User();
-		 user.setName("lili");
-		 user.setPassword("lili"); 
-		 user.setOccupation("系统管理员");
-		 dao.add(user);
-		 }
+	 public ArrayList<User> list(){
+		 this.read();
+		 return userlist;
+	 }
 	   
 }

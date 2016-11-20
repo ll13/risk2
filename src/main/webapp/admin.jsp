@@ -55,7 +55,6 @@
 			<div class="right_box border">
 				<table  width=100% cellspacing="20">
 					<tr>
-						<th>id</th>
 						<th>用户名</th>
 						<th>密码</th>
 						<th>职位</th>

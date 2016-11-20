@@ -52,27 +52,25 @@ public class AdminController extends HttpServlet {
 			session.setAttribute("userList", list);
 			response.sendRedirect("admin.jsp"); 
 		}else if(method.equals("delete")){
-			String id=request.getParameter("id");
-			this.delete(id);
+			String name=request.getParameter("name");
+			this.delete(name);
 			ArrayList<User> list=this.list();
 			HttpSession session = request.getSession();
 			session.setAttribute("userList", list);
 			response.sendRedirect("admin.jsp"); 
 		}else if(method.equals("add")){
 			User user=new User();
-			user.setId(request.getParameter("id"));
-			user.setUsername(request.getParameter("username"));
+			user.setName(request.getParameter("username"));
 			user.setPassword(request.getParameter("password"));
 			user.setOccupation(request.getParameter("occupation"));
 			this.add(user);
 			response.sendRedirect("adminadd.jsp");
 		}else if(method.equals("update")){
 			User user=new User();
-			user.setId(request.getParameter("id"));
-			user.setUsername(request.getParameter("username"));
+			user.setName(request.getParameter("username"));
 			user.setPassword(request.getParameter("password"));
 			user.setOccupation(request.getParameter("occupation"));
-			this.delete(user.getId());
+			this.delete(user.getName());
 			this.add(user);
 			response.sendRedirect("adminupdate.jsp");
 		}
@@ -83,14 +81,15 @@ public class AdminController extends HttpServlet {
 		UserDao userDao=new UserDao();
 		userDao.add(user);
 	}
-	protected void delete(String id){
+	protected boolean delete(String name){
 		UserDao userDao=new UserDao();
-		userDao.delete(id);
+		boolean result=userDao.delete(name);
+		return result;
 	}
 	protected ArrayList<User> list(){
 		ArrayList<User>userList=new ArrayList<User>();
 		UserDao userDao=new UserDao();
-		userList=userDao.list(userList);
+		userList=userDao.list();
 		return userList;
 		
 	}

@@ -50,14 +50,15 @@
 			更新风险类型
 			<div class="nav"></div>
 			<form action="trigger" method=post>
-				<input type="hidden" name="method" /> id:<input type="text"
-					name="id"><br />
-				<div class="nav"></div>
-				<div class="nav"></div>
+				<input type="hidden" name="method" /> 
 				风险类型:<input type="text" name="type"><br />
 				<div class="nav"></div>
 				<div class="nav"></div>
-				可能性:<select name="possibility">
+				<div class="nav"></div>
+				<div class="nav"></div>
+				<div class="nav"></div>
+				<div class="nav"></div>
+				可能性:<select name="possible">
 					<option value="高">高</option>
 					<option value="中">中</option>
 					<option value="低">低</option>

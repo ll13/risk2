@@ -47,32 +47,30 @@
 
 			</div>
 			<%@page import="java.util.*"%> 
-			<%@page import="vo.Trigger" %>
-			<%ArrayList<Object> triggerlist=(ArrayList<Object>)session.getAttribute("triggerList");%>			
+			<%@page import="vo.RiskType" %>
+			<%ArrayList<Object> risktypelist=(ArrayList<Object>)session.getAttribute("risktypelist");%>			
 			<div class="right_box border">
 				<table  width=100% cellspacing="20">
 					<tr>
-						<th>id</th>
 						<th>风险类型</th>
 						<th>可能性</th>
 						<th>影响程度</th>
 					</tr>
-					<%for(int i=0;i<triggerlist.size();i++){ %>
-					<%Trigger trigger=null; %>
+					<%for(int i=0;i<risktypelist.size();i++){ %>
+					<% RiskType risktype=null; %>
 								
 					
 					<tr>
-					<%trigger=(Trigger)triggerlist.get(i);%>
-						<td><%=trigger.getId() %></td>
-						<td><%=trigger.getType() %></td>
-						<td><%=trigger.getPossibility() %></td>
-						<td><%=trigger.getInfluence() %></td>
+					<%risktype=(RiskType)risktypelist.get(i);%>
+						<td><%=risktype.getType() %></td>
+						<td><%=risktype.getPossible()  %></td>
+						<td><%=risktype.getInfluence() %></td>
 					</tr>
 					<% }%>
 				</table>
 				 <form action="trigger" method=post>
 				 <input type= "hidden" name= "method"/> 
-				 id:<input type=text name="id">
+				 类型:<input type=text name="type">
 				 <input type="submit"  value="删除风险类型" onclick="method.value='delete'">
 				 </form>
 			</div>

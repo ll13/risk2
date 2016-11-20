@@ -1,6 +1,7 @@
 package data;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -11,9 +12,11 @@ public class Write {
  
 private void write(String file_path,String []content){
 	  try{
-		  FileOutputStream fos=new FileOutputStream(file_path);
-	        OutputStreamWriter osw=new OutputStreamWriter(fos, "UTF-8");
-	        BufferedWriter  bw=new BufferedWriter(osw);
+		  ClassLoader classLoader = getClass().getClassLoader();  
+		  String url=classLoader.getResource(file_path).getFile();  
+		  FileOutputStream fos=new FileOutputStream(url);
+	      OutputStreamWriter osw=new OutputStreamWriter(fos, "UTF-8");
+	      BufferedWriter  bw=new BufferedWriter(osw);
 		  if(content.length>0){
 			  for(int i=0;i<content.length;i++){
 				  
@@ -49,5 +52,6 @@ private void write(String file_path,String []content){
 	  write(path,merge(set));
 	
   }
- 
+  
+         
 }

@@ -24,10 +24,9 @@ public void deleteFlie(String path,String name){
 }
 
 public void init(){
-	this.makeDir("", "data");
-	this.makeTxt("data"+File.separator, "user");
-	this.makeTxt("data"+File.separator, "riskType");
-	this.makeTxt("data"+File.separator, "riskItem");
+	this.makeTxt("src/main/resources"+File.separator, "user");
+	this.makeTxt("src/main/resources"+File.separator, "riskType");
+	this.makeTxt("src/main/resources"+File.separator, "riskItem");
 	
 }
 public static void main(String [] args){

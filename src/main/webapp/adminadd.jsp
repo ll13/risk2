@@ -54,9 +54,6 @@
 				<div class="nav"></div>
 				<form action="admin" method=post>
 				 <input type= "hidden" name= "method"/> 
-				    id:<input type="text" name="id"><br />
-					<div class="nav"></div>
-					<div class="nav"></div>
 					用户名:<input type="text" name="username"><br />
 					<div class="nav"></div>
 					<div class="nav"></div>
