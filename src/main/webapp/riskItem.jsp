@@ -49,33 +49,36 @@
 			</div>
 			<%@page import="java.util.*"%> 
 			<%@page import="vo.RiskItem" %>
+			<%@page import= "java.text.SimpleDateFormat" %>
 			<%ArrayList<Object> riskItemlist=(ArrayList<Object>)session.getAttribute("riskItemList");%>	
 			<div class="right_box border">
 				<table  width=100% cellspacing="20">
 					<tr>
-						<th>id</th>
+					    <th>日期</th>
 						<th>风险名称</th>
 						<th>风险类型</th>
-						<th>可能性</th>
+						<th>可能性</th>						
 						<th>影响程度</th>
-						<th>风险状态</th>
 						<th>提交者</th>
 						<th>跟踪者</th>
+						<th>风险状态</th>	
+						
 					
 					</tr>
 					<%for(int i=0;i<riskItemlist.size();i++){ %>
 					<%RiskItem riskItem=null; %>
-								
+					  <%riskItem=(RiskItem)riskItemlist.get(i); %>
+					 	
 					<tr>
-					<%riskItem=(RiskItem)riskItemlist.get(i);%>
-						
+					  <%SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");%>			
+					    <td><%=df.format(riskItem.getDate())%></td>
 						<td><%=riskItem.getName()  %></td>
 						<td><%=riskItem.getType() %></td>
 						<td><%=riskItem.getPossible() %></td>
-						<td><%=riskItem.getInfluence() %></td>
-						<td><%=riskItem.getStatus() %></td>
+						<td><%=riskItem.getInfluence() %></td>					
 						<td><%=riskItem.getCommit() %></td>
 						<td><%=riskItem.getFollow() %></td>
+					    <td><%=riskItem.getStatus() %></td>
 					</tr>
 					<% }%>
 				</table>
@@ -84,7 +87,7 @@
 				<form action="riskItem" method=post>
 				 <input type= "hidden" name= "method"/> 
 				 <div class="nav"></div>
-				  风险名称  <input type=text name="riskname">
+				  风险名称  <input type=text name="name">
 					<input type="submit"  value="追踪风险" onclick="method.value='find'">
 				</form>
 				

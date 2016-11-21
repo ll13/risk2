@@ -51,30 +51,25 @@
 				<div class="nav"></div>
 				<form action="riskItem" method=post>
 				 <input type= "hidden" name= "method"/> 
-				    id:<input type="text" name="id"><br />
-					<div class="nav"></div>
-					<div class="nav"></div>
-					风险名称:<input type="text" name="riskname"><br />
+				
+					风险名称:<input type="text" name="name"><br />
 					<div class="nav"></div>
 					<div class="nav"></div>
 					风险类型:<input type="text" name="type"><br />
-					<div class="nav"></div>
-					
-					
-					风险状态:<input type="text" name="status"><br />
-					<div class="nav"></div>
-					<div class="nav"></div>
+					<div class="nav"></div>						
 					提交者:<input type="text" name="commit"><br />
 					<div class="nav"></div>
 					<div class="nav"></div>
 					跟踪者:<input type="text" name="follow"><br />
 					<div class="nav"></div>
 					<div class="nav"></div>
-					可能性： <select name="possibility">
+					风险状态:<input type="text" name="status"><br />
+					<div class="nav"></div>
+					<div class="nav"></div>
+					可能性： <select name="possible">
 						<option value="高">高</option>
 						<option value="中">中</option>
 						<option value="低">低</option>
-
 					</select>
 					影响程度： <select name="influence">
 						<option value="高">高</option>

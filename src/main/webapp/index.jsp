@@ -46,10 +46,17 @@
 				<div class="nav"></div>
 				<div class="nav"></div>
 				<div class="nav"></div>
-				<form action="solution" method="post">
-					<input type="submit" value="解决方案">
+				<form action="ra" method="post">
+					<input type="submit" value="风险计划 ">
 				</form>
-
+                
+                <div class="nav"></div>
+				<div class="nav"></div>
+				<div class="nav"></div>
+				<form action="sum" method="post">
+					<input type="submit" value="统计 ">
+				</form>
+                
 				<div class="nav"></div>
 				<div class="nav"></div>
 				<div class="nav"></div>
