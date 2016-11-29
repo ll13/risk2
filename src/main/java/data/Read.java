@@ -13,8 +13,8 @@ public class Read{
 	    ClassLoader classLoader = getClass().getClassLoader();  
 	    File file = new File(classLoader.getResource(fileName).getFile());  
 	    System.out.println(classLoader.getResource(fileName).getFile());
-	    try (Scanner scanner = new Scanner(file)) {  
-	   
+	    try  {  
+	    	Scanner scanner = new Scanner(file);
 	        while (scanner.hasNextLine()) {  
 	            String line = scanner.nextLine();  
 	            result.append(line).append("\n");  
