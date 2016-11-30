@@ -40,6 +40,7 @@
 			<%
 				ArrayList<Object> planlist = (ArrayList<Object>) session.getAttribute("planList");
 			%>
+			
 			<div class="right_box border">
 
 				<%for (int i = 0; i < planlist.size(); i++) {%>
@@ -48,8 +49,8 @@
 					<%plan = (Plan) planlist.get(i);%>
 					
 					<form action="plan" method=post>
-						<input type="hidden" name="method" />  
-						<input type="submit" value=<%=plan.getName() %> onclick="method.value=<%=plan.getName()%> ">
+						<input type="hidden" name="method" value=<%=plan.getName()%>>  
+						<input type="submit" value=<%=plan.getName()%> >
 					</form>
 				
 				<%}%>

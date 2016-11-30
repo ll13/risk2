@@ -30,13 +30,15 @@ public class PlanDao {
 		for(int i=0;i<planset.length;i++){
 		  Plan plan=new Plan();
 		  plan.setName(planset[i][0]);
+		  planlist.add(plan);
 		  
 		}
 	   }
 	}
 	
 	   public void read(){
-		   String[][] set= read.readData("plan.txt");	   
+		   String[][] set= read.readData("plan.txt");	
+		  
 		  this.setToList(set);
 	   }
 	   public void write(){

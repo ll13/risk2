@@ -129,7 +129,17 @@ public class RiskItemDao {
 		}
 		return result;
 	}
-
+	public ArrayList<RiskItem> listPlan(String planName) {
+		this.read();
+		ArrayList<RiskItem> result = new ArrayList<RiskItem>();
+		for (int i = 0; i < riskItemlist.size(); i++) {
+			if (riskItemlist.get(i).getIsNew().equals("是")) {
+				if(riskItemlist.get(i).getRa().equals(planName)){
+				    result.add(riskItemlist.get(i));}
+			}
+		}
+		return result;
+	}
     public RiskItem rightStatus(RiskItem riskItem){
     	RiskTypeDao risktypeDao=new RiskTypeDao();
 		RiskType riskType=risktypeDao.find(riskItem.getType());

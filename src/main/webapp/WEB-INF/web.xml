@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:javaee="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
   <javaee:display-name>risk2</javaee:display-name>
-  <servlet>
-  	<description>
-  	</description>
-  	<display-name>PlanController</display-name>
-  	<servlet-name>PlanController</servlet-name>
-  	<servlet-class>web.PlanController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>PlanController</servlet-name>
-  	<url-pattern>/PlanController</url-pattern>
-  </servlet-mapping>
 		<welcome-file-list>
 			<welcome-file>index.html</welcome-file>
 			<welcome-file>index.htm</welcome-file>

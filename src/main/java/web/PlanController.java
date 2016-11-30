@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.PlanDao;
+import dao.RiskItemDao;
 import vo.Plan;
-
+import vo.RiskItem;
 
 /**
  * Servlet implementation class PlanController
@@ -42,11 +43,11 @@ public class PlanController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("kk");
 		String method=request.getParameter("method");
 		if(method==null){
 			method="list";
 		}
+		
 		if(method.equals("list")){
 			ArrayList<Plan> list=this.list();
 			HttpSession session = request.getSession();
@@ -54,22 +55,40 @@ public class PlanController extends HttpServlet {
 			response.sendRedirect("plan.jsp"); 
 		}else if(method.equals("add")){
 			Plan plan=new Plan();
-			plan.setName(request.getParameter("name"));		
+			plan.setName(request.getParameter("name"));			
 			this.add(plan);
-			response.sendRedirect("plan.jsp");
+			ArrayList<Plan> list=this.list();
+			HttpSession session = request.getSession();
+			session.setAttribute("planList", list);
+			response.sendRedirect("plan.jsp"); 
+		}else{
+			System.out.println(method);
+			ArrayList<RiskItem> list=this.listPlan(method);
+			HttpSession session = request.getSession();
+			session.setAttribute("riskItemList", list);
+			response.sendRedirect("riskItem.jsp"); 
 		}
-	}
-	
-	protected ArrayList<Plan> list(){
-		ArrayList<Plan>planList=new ArrayList<Plan>();
-		PlanDao planDao=new PlanDao();
-		planList=planDao.list();
-		return planList;
+		
 		
 	}
 	protected void add(Plan plan){
 		PlanDao planDao=new PlanDao();
 		planDao.add(plan);
 	}
+	
+	protected ArrayList<Plan> list(){
+		ArrayList<Plan> planList=new ArrayList<Plan>();
+		PlanDao planDao=new PlanDao();
+		planList=planDao.list();
+		return planList;
+		
+	}
+	protected ArrayList<RiskItem> listPlan(String planName){
+		ArrayList<RiskItem> riskItemList=new ArrayList<RiskItem>();
+		RiskItemDao riskItemDao=new RiskItemDao();
+		riskItemList=riskItemDao.listPlan( planName);
+		return riskItemList;
+	}
 
 }
+
