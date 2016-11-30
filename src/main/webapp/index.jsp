@@ -46,7 +46,7 @@
 				<div class="nav"></div>
 				<div class="nav"></div>
 				<div class="nav"></div>
-				<form action="ra" method="post">
+				<form action="plan" method="post">
 					<input type="submit" value="风险计划 ">
 				</form>
                 
