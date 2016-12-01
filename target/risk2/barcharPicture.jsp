@@ -4,11 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>picture</title>
 </head>
 <body>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-    <div id="main" style="height:400px"></div>
+    <div id="main1" style="height:400px"></div>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main2" style="height:400px"></div>
     <!-- ECharts单文件引入 -->
     <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
     <script type="text/javascript">
@@ -27,9 +29,9 @@
             ],
             function (ec) {
                 // 基于准备好的dom，初始化echarts图表
-                var myChart = ec.init(document.getElementById('main')); 
-                
-                var option = {
+                var myChart1 = ec.init(document.getElementById('main1')); 
+                var myChart2 = ec.init(document.getElementById('main2')); 
+                var option1 = {
                     tooltip: {
                         show: true
                     },
@@ -51,14 +53,41 @@
                         {
                             "name":"销量",
                             "type":"bar",
-                            <%int intt=3;%>
-                            "data":[<%=intt%>, 20, 40, 10, 10, 20]
+                            <%int [] kk={20,49,30,40,20};%>
+                             "data":[<%=kk[0]%>,<%=kk[1]%>,<%=kk[2]%>,<%=kk[3]%>,<%=kk[4]%>]
                         }
                     ]
                 };
-        
+                var option2 = {
+                        tooltip: {
+                            show: true
+                        },
+                        legend: {
+                            data:['变成问题最多的风险']
+                        },
+                        xAxis : [
+                            {
+                                type : 'category',
+                                data : ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+                            }
+                        ],
+                        yAxis : [
+                            {
+                                type : 'value'
+                            }
+                        ],
+                        series : [
+                            {
+                                "name":"销量",
+                                "type":"bar",
+                                
+                                "data":[5, 20, 40, 10, 10, 20]
+                            }
+                        ]
+                    };
                 // 为echarts对象加载数据 
-                myChart.setOption(option); 
+                myChart1.setOption(option1); 
+                myChart2.setOption(option2); 
             }
         );
     </script>

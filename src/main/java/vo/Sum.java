@@ -1,13 +1,14 @@
 package vo;
 
 public class Sum {
-     String type="";
+     String name="";
      int number=0;
-	public String getType() {
-		return type;
+	
+	public String getName() {
+		return name;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public int getNumber() {
 		return number;

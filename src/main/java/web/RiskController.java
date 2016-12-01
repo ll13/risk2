@@ -33,6 +33,7 @@ public class RiskController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	/**
@@ -40,6 +41,7 @@ public class RiskController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		String method=request.getParameter("method");
 		if(method==null){
 			method="list";
@@ -90,7 +92,47 @@ public class RiskController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("riskItemList", list);
 			response.sendRedirect("riskItem.jsp"); 
+		}else if(method.equals("getMax")){
+			String begin=request.getParameter("begin");
+			String end=request.getParameter("end");
+			ArrayList<RiskItem> list=this.findGetMax(begin,end);
+			HttpSession session = request.getSession();
+			session.setAttribute("riskItemList", list);
+			response.sendRedirect("riskItem.jsp"); 
+		}else if(method.equals("problemMax")){
+			String begin=request.getParameter("begin");
+			String end=request.getParameter("end");
+			ArrayList<RiskItem> list=this.findProblemMax(begin,end);
+			HttpSession session = request.getSession();
+			session.setAttribute("riskItemList", list);
+			response.sendRedirect("riskItem.jsp"); 
+		}else if (method.equals("input")){
+			String planName=request.getParameter("planName");
+			String riskItemNameArray=request.getParameter("arrays");
+			String[] riskNameSet=riskItemNameArray.split(",");
+			for(int i=0;i<riskNameSet.length;i++){
+				this.updatera(riskNameSet[i],planName);
+			}
+			response.sendRedirect("riskItem.jsp"); 
 		}
+		
+		
+	}
+	protected void updatera(String riskName,String planName){
+		RiskItemDao riskItemDao=new RiskItemDao();
+		riskItemDao.updatera(riskName, planName );		
+	}
+ 	protected ArrayList<RiskItem> findGetMax(String begin,String end){
+		ArrayList<RiskItem> riskItemList=new ArrayList<RiskItem>();
+		RiskItemDao riskItemDao=new RiskItemDao();
+		riskItemList=riskItemDao.findGetMax(riskItemList, begin , end);		
+		return riskItemList;
+	}
+	protected ArrayList<RiskItem> findProblemMax(String begin,String end){
+		ArrayList<RiskItem> riskItemList=new ArrayList<RiskItem>();
+		RiskItemDao riskItemDao=new RiskItemDao();
+		riskItemList=riskItemDao.findProblemMax(riskItemList, begin , end);
+		return riskItemList;
 	}
 	protected ArrayList<RiskItem> find(String name){
 		ArrayList<RiskItem> riskItemList=new ArrayList<RiskItem>();

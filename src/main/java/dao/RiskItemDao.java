@@ -8,6 +8,7 @@ import data.Read;
 import data.Write;
 import vo.RiskItem;
 import vo.RiskType;
+import vo.Sum;
 
 public class RiskItemDao {
 	ArrayList<RiskItem> riskItemlist = new ArrayList<RiskItem>();
@@ -129,6 +130,132 @@ public class RiskItemDao {
 		}
 		return result;
 	}
+	public ArrayList<RiskItem> beginEnd(ArrayList<RiskItem> result,String beginS,String endS) {
+		this.read();		
+		Calendar begin = Calendar.getInstance();
+		Calendar end = Calendar.getInstance();
+		Calendar compare = Calendar.getInstance();
+		String begintime[] =beginS.split("/") ;
+		String endtime[] = endS.split("/");
+		begin.set(Integer.parseInt(begintime[0]), Integer.parseInt(begintime[1]) - 1, Integer.parseInt(begintime[2]));
+		end.set(Integer.parseInt(endtime[0]), Integer.parseInt(endtime[1]) - 1, Integer.parseInt(endtime[2]));
+		long beginMi=begin.getTimeInMillis();
+		long endMi=end.getTimeInMillis();
+		for(int i=0;i<riskItemlist.size();i++){
+			compare.setTime(riskItemlist.get(i).getDate());
+			long compareMi=compare.getTimeInMillis();
+			long bc=0,ec=0;
+			bc=((compareMi-beginMi)/(1000*60*60*24));
+			ec=((compareMi-endMi)/(1000*60*60*24));
+			if(bc>=0){
+				if(ec<=0){
+					result.add(riskItemlist.get(i));
+				}
+			}
+		}
+		
+		return result;
+	}
+	public  ArrayList<Sum> listGat(ArrayList<Sum> sumlist){
+		this.read();
+		sumlist=this.sort(riskItemlist);
+		return sumlist;
+	}
+	public  ArrayList<Sum> listProblem(ArrayList<Sum> sumlist){
+		this.read();
+		ArrayList<RiskItem> temp=new ArrayList<RiskItem>();
+		temp=this.isProblem(riskItemlist);
+		sumlist=this.sort(temp);
+		return sumlist;
+	}
+	public  ArrayList<Sum> listGat(ArrayList<Sum> sumlist,String begin,String end){
+		this.read();
+		ArrayList<RiskItem> temp=new ArrayList<RiskItem>();
+		temp=this.beginEnd(temp, begin, end);
+		sumlist=this.sort(temp);
+		return sumlist;
+	}
+	public  ArrayList<Sum> listProblem(ArrayList<Sum> sumlist,String begin,String end){
+		this.read();
+		ArrayList<RiskItem> temp=new ArrayList<RiskItem>();
+		temp=this.beginEnd(temp, begin, end);
+		temp=this.isProblem(temp);
+		sumlist=this.sort(temp);
+		return sumlist;
+	}
+	public ArrayList<Sum> sort(ArrayList<RiskItem> input){
+		ArrayList<Sum> output=new ArrayList<Sum>();
+		while(input.size()>0){
+			RiskItem compare= null;
+			Sum sum=new Sum();
+			int i=0;
+			compare=input.get(i);
+			sum.setName(compare.getName());
+			sum.setNumber(sum.getNumber()+1);
+			input.remove(i);
+			while(input.size()>i){
+					if(input.get(i).getName().equals(compare.getName())){
+						sum.setNumber(sum.getNumber()+1);
+						input.remove(i);
+					}else{
+						i++;
+					}
+			}
+			output.add(sum);
+		}
+		return output;
+	}
+	public ArrayList<RiskItem> findGetMax(ArrayList<RiskItem> list,String begin ,String end){
+		ArrayList <RiskItem> temp=new ArrayList <RiskItem>();
+		temp=this.beginEnd(temp, begin, end);
+		ArrayList<Sum> sumlist=this.sort(temp);
+		temp=this.beginEnd(temp, begin, end);
+		int max=0;
+		String maxName="";
+		for(int i=0;i<sumlist.size();i++){
+			if(sumlist.get(i).getNumber()>max){
+				max=sumlist.get(i).getNumber();
+				maxName=sumlist.get(i).getName();
+			}
+		}
+		for(int i=0;i<temp.size();i++){
+			if(temp.get(i).getName().equals(maxName)){
+				list.add(temp.get(i));
+			}
+		}
+		return list;
+	}
+	public ArrayList<RiskItem> isProblem(ArrayList<RiskItem> input){
+		ArrayList<RiskItem> output=new ArrayList<RiskItem>();
+		for(int i=0;i<input.size();i++){
+			if(input.get(i).getStatus().equals("问题")){
+				output.add(input.get(i));
+			}
+		}
+		return output;
+	}
+	public ArrayList<RiskItem> findProblemMax(ArrayList<RiskItem> list,String begin ,String end){
+		ArrayList <RiskItem> temp=new ArrayList <RiskItem>();
+		temp=this.beginEnd(temp, begin, end);
+		temp=this.isProblem(temp);
+		ArrayList<Sum> sumlist=this.sort(temp);
+		temp=this.beginEnd(temp, begin, end);
+		temp=this.isProblem(temp);
+		int max=0;
+		String maxName="";
+		for(int i=0;i<sumlist.size();i++){
+			if(sumlist.get(i).getNumber()>max){
+				max=sumlist.get(i).getNumber();
+				maxName=sumlist.get(i).getName();
+			}
+		}
+		for(int i=0;i<temp.size();i++){
+			if(temp.get(i).getName().equals(maxName)){
+				list.add(temp.get(i));
+			}
+		}
+		return list;
+	}
 	public ArrayList<RiskItem> listPlan(String planName) {
 		this.read();
 		ArrayList<RiskItem> result = new ArrayList<RiskItem>();
@@ -139,6 +266,16 @@ public class RiskItemDao {
 			}
 		}
 		return result;
+	}
+	public void updatera(String riskName,String planName){
+		this.read();
+		for (int i = 0; i <riskItemlist .size(); i++) {
+			if(riskItemlist.get(i).getName().equals(riskName)){
+				riskItemlist.get(i).setRa(planName);
+			}
+		}
+		this.write();
+
 	}
     public RiskItem rightStatus(RiskItem riskItem){
     	RiskTypeDao risktypeDao=new RiskTypeDao();
